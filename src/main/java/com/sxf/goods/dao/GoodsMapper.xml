@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" ?> 
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.sxf.goods.dao.GoodsMapper">
+	
+	<!-- <resultMap type="com.sxf.goods.domain.Goods" id="ResultByList">
+		
+	</resultMap> -->
+	<!-- 列表 -->
+	<select id="selects" resultType="goods">
+		select g.gid,g.gname,b.bname,g.datea from t_goods g LEFT JOIN t_brand b on g.typeId=b.bid
+		
+		<where>
+			<!-- 品牌的模糊查询 -->
+			<if test="gname!=null and gname!=''">
+				g.gname like "%"#{gname}"%"
+			</if>
+		</where>
+	</select>
+	
+	<insert id="insert">
+		insert into t_goods(gname,datea,typeId,price) values(#{gname},#{datea},#{typeId},#{price})
+	</insert>
+	
+	<select id="selectGoods" resultType="goods">
+		select g.gid,g.gname,b.bname,g.datea from t_goods g LEFT JOIN t_brand b on g.gid=b.bid where g.gid=#{gid}
+	</select>
+	
+	<select id="selectByBrand" resultType="brand">
+		select * from t_brand
+	</select>
+</mapper>
